@@ -1,0 +1,53 @@
+/* Documento */
+* {
+	margin:0;
+	padding:0;
+}
+
+body{
+  min-height: 100%;
+  top: 0;
+  margin:0;
+  padding:0;
+}
+
+
+header {
+	width:100%;
+}
+/* CARRUSEL*/
+.center-crop{
+  max-height: 848px;
+  min-height: 565px;
+  object-fit: initial;
+}
+
+
+footer,
+section#main,
+body{
+    width: 100%;
+    position: absolute;
+}
+
+section#main{
+    min-height: 100%;
+}
+
+footer{
+    background-color: #36A0FF !important;
+    text-align: center;
+    bottom: 0;
+    position: relative;
+}
+
+.carta {
+  margin: 0 auto;
+  float: none;
+
+}
+
+
+
+
+}

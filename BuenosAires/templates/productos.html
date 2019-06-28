@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Productos</title>
+
+    <link rel="stylesheet" href="{% static './css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static './css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static './css/estilo.css' %}">
+
+</head>
+<body>
+    <!-- navbar -->
+    {% include './navbar.html' %}
+
+    <!-- CONTENIDO -->
+<!--Carta de productos--> 
+<br>
+        {% if productos %}
+            <div class="container">
+            <div class="row">
+        {% for p in productos %}
+        <div class="col-md-4">   
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">{{p.titulo}}</h2>
+              <p class="card-text">{{p.descripcion}}</p>
+              <h3 class="card-text">${{p.precio}}</h3>
+              <a href='https://www.flow.cl/btn.php?token=0cmfxpr' target='_blank'>
+                <img src='https://www.flow.cl/img/botones/btn-pagar-celeste.png'>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+        </div>
+        {% else %}
+        <h4>No existen registros de servicio</h4>
+        {% endif %}
+        <br>
+
+    <!-- FOOTER -->
+    {% include './footer.html' %}
+
+
+
+
+
+
+
+
+
+
+    <script src="{% static './js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static './js/popper.js' %}"></script>
+    <script src="{% static './js/app.js' %}"></script>
+</body>

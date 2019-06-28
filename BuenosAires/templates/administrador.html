@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administrador</title>
+
+    <link rel="stylesheet" href="{% static './css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static './css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static './css/estilo.css' %}">
+
+</head>
+<body>
+    <!-- navbar -->
+    {% include './navbar.html' %}
+
+    <!-- CONTENIDO -->
+    <br>
+<br>
+      <!-- LISTA DE USUARIOS-->
+    <H2 style="text-align: center">Lista de usuarios</H2><br>
+    <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre de Usuario</th>
+              <th scope="col">Email</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Comuna</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            {% if usuario %}
+            {% for u in usuario %}
+            <tr>
+              <td>{{u.id}}</td>
+              <td>{{u.username}}</td>
+              <td>{{u.email}}</td>
+              <td>{{u.direccion}}</td>
+              <td>{{u.ciudad}}</td>
+              <td>{{u.comuna}}</td>
+              <td>
+                <a class="btn btn-info " href="#editar_u{{u.id}}}">Editar</a>
+                <a class="btn btn-danger" data-toggle="modal" href="#eliminar_u{{u.id}}">Eliminar</a>
+              </td>
+              <div class="modal fade" id="eliminar_u{{u.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="eliminar_u/{{u.id}}" method="POST" >
+                        {% csrf_token %}
+                        <h4>¿Esta seguro de eliminar este usuario?</h4>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger"  type="submit">Si, eliminar</button>
+                            <a class="btn btn-light" href="{% url 'administrador' %}">Cancelar</a>    
+                        </div>                      
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </tr>
+              </div>
+            {% endfor %}
+            {% else %}
+            <h4>No existen usuarios</h4>
+            {% endif %}
+          </tbody>
+        </table>
+       
+
+        <H2 style="text-align: center">Lista de Solicitudes</H2><br>
+        <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Email</th>
+              <th scope="col">Asunto</th>
+              <th scope="col">Mensaje</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            {% if solicitud %}
+            {% for s in solicitud %}
+            <tr>
+                <td>{{s.id}}</td>
+                <td>{{s.nombres}}</td>
+                <td>{{s.email}}</td>
+                <td>{{s.asunto}}</td>
+                <td>{{s.mensaje}}</td>
+                <td>{{s.direccion}}</td>
+                <td>{{s.estado}}</td>
+                <td>
+                    <button class="btn btn-info " data-toggle="modal" href="#editar_s{{s.id}}">Editar</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#eliminar_s{{s.id}}">Eliminar</button>
+                </td>
+                          <!-- MODAL EDITAR SERVICIO -->
+                          <div class="modal fade" id="editar_s{{s.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Editar estado de Solicitud</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form class="form-group" action="editar_s/{{s.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <label for="estado"><b>Estado</b></label>
+                                    <input class="form-control" type="text" name="estado" id="estado" value="{{r.estado}}">
+                                    <div class="modal-footer">
+                                      <button class="btn btn-info"  type="submit">Editar</button>
+                                      <a class="btn btn-default" href="{% url 'administrador' %}">Cancelar</a>  
+                                    </div>       
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                          </tr>
+                          
+              
+                          <!-- MODAL ELIMINAR SERVICIO -->
+                          <div class="modal fade" id="eliminar_s{{s.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form class="form-group" action="eliminar_s/{{s.id}}" method="POST" >
+                                    {% csrf_token %}
+                                    <h4>¿Esta seguro de eliminar esta solicitud?</h4>
+                                    <div class="modal-footer">
+                                    <button class="btn btn-danger"  type="submit">Si, eliminar</button>
+                                    <a class="btn btn-light" href="{% url 'administrador' %}">Cancelar</a>
+                                    </div>                   
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                          </tr>
+                          </div>
+                        {% endfor %}
+                        {% else %}
+                        <h4>No existen servicios</h4>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                </tbody>
+          </table>
+          </div>
+
+
+          <H2 style="text-align: center">Lista de Productos</H2><br>
+        <div class="container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            {% if productos %}
+            {% for p in productos %}
+            <tr>
+                <td>{{p.id}}</td>
+                <td>{{p.titulo}}</td>
+                <td>{{p.descripcion}}</td>
+                <td>{{p.precio}}</td>
+                <td>
+                    <button class="btn btn-info " data-toggle="modal" href="#editar_p{{p.id}}">Editar</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#eliminar_p{{p.id}}">Eliminar</button>
+                </td>
+                          <!-- MODAL EDITAR SERVICIO -->
+                          <div class="modal fade" id="editar_p{{p.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Editar estado de Solicitud</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form class="form-group" action="editar_p/{{p.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <label for="titulo"><b>Titulo</b></label>
+                                    <input class="form-control" type="text" name="titulo" id="titulo" value="{{r.titulo}}">
+                                    <label for="descripcion"><b>Descripcion</b></label>
+                                    <input class="form-control" type="text" name="descripcion" id="descripcion" value="{{r.descripcion}}">
+                                    <label for="precio"><b>Precio</b></label>
+                                    <input class="form-control" type="text" name="precio" id="precio" value="{{r.precio}}">
+                                    <div class="modal-footer">
+                                      <button class="btn btn-info"  type="submit">Editar</button>
+                                      <a class="btn btn-default" href="{% url 'administrador' %}">Cancelar</a>  
+                                    </div>       
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                          </tr>
+                          
+              
+                          <!-- MODAL ELIMINAR SERVICIO -->
+                          <div class="modal fade" id="eliminar_p{{p.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form class="form-group" action="eliminar_p/{{p.id}}" method="POST" >
+                                    {% csrf_token %}
+                                    <h4>¿Esta seguro de eliminar esta solicitud?</h4>
+                                    <div class="modal-footer">
+                                    <button class="btn btn-danger"  type="submit">Si, eliminar</button>
+                                    <a class="btn btn-light" href="{% url 'administrador' %}">Cancelar</a>
+                                    </div>                   
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                          </tr>
+                          </div>
+                        {% endfor %}
+                        {% else %}
+                        <h4>No existen Productos</h4>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                </tbody>
+          </table>
+          </div>
+          
+          
+
+        
+
+
+    
+    <!-- FOOTER -->
+    <br><br><br>
+    {% include './footer.html' %}
+
+
+
+
+
+
+
+
+
+
+    <script src="{% static './js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static './js/popper.js' %}"></script>
+    <script src="{% static './js/app.js' %}"></script>
+</body>

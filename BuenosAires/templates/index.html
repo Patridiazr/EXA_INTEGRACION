@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Buenos Aires</title>
+
+    <link rel="stylesheet" href="{% static './css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static './css/estilo.css' %}">
+
+</head>
+<body>
+    <!-- navbar -->
+    {% include './navbar.html' %}
+
+    <!-- CONTENIDO -->
+
+    <div class="jumbotron ">
+        <div class="container">
+        <div class="jumbotron-background ">
+            <img src="{% static './img/fondo-celeste.jpg' %}">
+          <h1 class="display-4">Aires Acondicionados</h1>
+          <p class="lead">Especialistas en Climatizacion.</p>
+        </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">   
+                <div class="card">
+                <img src="{% static './img/aires.jpg' %}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h2 class="card-title">Productos</h2>
+                    <p class="card-text">Podras elegir en un amplio catalogo de Productos</p>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">   
+                    <div class="card">
+                    <img src="{% static './img/aires.jpg' %}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h2 class="card-title">Solicitud de Mantencion</h2>
+                        <p class="card-text">Podras solicitar una visita de Mantencion para tu servicio contra</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4">   
+                        <div class="card">
+                        <img src="{% static './img/aires.jpg' %}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h2 class="card-title">Solicitud tecnica</h2>
+                            <p class="card-text">Podras solicitar una visita de un tecnico a tu casa, en caso de necesitar</p>
+                          </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <br><br>
+            </div>
+        </div>
+        <br><br>
+
+    <!-- FOOTER -->
+    {% include './footer.html' %}
+    
+    <script src="{% static './js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static './js/popper.js' %}"></script>
+    <script src="{% static './js/app.js' %}"></script>
+</body>
