@@ -18,11 +18,13 @@ urlpatterns = [
    path('solicitud/',views.solicitud,name="solicitud"),
    path('administrador/',views.administrador,name="administrador"),
    path('regproducto/',views.regproducto,name="regproducto"),
+   path('listsol/',views.listsol,name="listsol"),
    
 
 
    #CRUD USUARIOS
    path('crear_U',views.crear_U, name="crear_U"),
+   path('crear_T',views.crear_T, name="crear_T"),
 
 
    #CRUD PRODUCTO LOGIN
@@ -41,9 +43,9 @@ urlpatterns = [
 
 
    #CRUD SOLICITUD
-   path('crear_S',views.crear_S, name="crear_S"),
-   path('administrador/eliminar_s/<int:id_solicitud>', views.eliminar_s, name="eliminar_s" ),
-   path('administrador/editar_s/<int:id_solicitud>', views.editar_s, name="editar_s" ),
+   path('solicitud/crear_S',views.crear_S, name="crear_S"),
+   path('listsol/eliminar_s/<int:id_solicitud>', views.eliminar_s, name="eliminar_s" ),
+   path('listsol/editar_s/<int:id_solicitud>', views.editar_s, name="editar_s" ),
    
 
 

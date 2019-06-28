@@ -27,6 +27,10 @@ def administrador (request):
     return render (request,'administrador.html',contexto)
 def regproducto (request):
     return render (request,'regproducto.html')
+def listsol (request):
+    solicitud = Solicitud.objects.all()
+    contexto = {'solicitud':solicitud}
+    return render (request,'listsol.html',contexto)
 
 #import de api
 from rest_framework import viewsets
@@ -44,10 +48,11 @@ def crear_U(request):
     comuna = request.POST.get('comuna','')
     usuario = Usuario(username=username,correo=correo,contra=contra,direccion=direccion,ciudad=ciudad,
     comuna=comuna)
-    usu = User.objects.create_user(email=correo,password=contra)
+    usu = User.objects.create_user(email=correo,password=contra,tipo="cliente")
     usuario.save()
     usu.save()
-    return redirect('index')
+    return HttpResponse('<script>alert("Cliente Agregado");'+
+                        ' window.location.href="/";</script>')
 
 #Eliminar usuario
 def eliminar_u(request,id_usu):
@@ -104,13 +109,26 @@ def editar_s(request,id_solicitud):
     estado = request.POST.get('estado')
     solicitud.estado = estado
     solicitud.save()
-    return redirect('administrador')
+    return HttpResponse('<script>alert("Solicitud editada correctamente");'+
+                        ' window.location.href="/";</script>')
 
 #Eliminar servicio
 def eliminar_s(request,id_solicitud):
     s = Solicitud.objects.get(id=id_solicitud)
     s.delete()
-    return redirect('administrador')
+    return HttpResponse('<script>alert("Solicitud eliminada correctamente");'+
+                        ' window.location.href="/";</script>')
+
+def crear_T(request):
+    correo = request.POST.get('correo','')
+    contra = request.POST.get('contra','')
+    usuario = Usuario(correo=correo,contra=contra)
+    usu = User.objects.create_user(email=correo,password=contra,tipo="tecnico")
+    usuario.save()
+    usu.save()
+    return HttpResponse('<script>alert("Tecnico Agregado");'+
+                        ' window.location.href="/";</script>')
+
 
 #Serialyzer
 

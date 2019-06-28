@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+
+    
+    <!-- navbar -->
+    {% include './navbar.html' %}
+
+    <div class="row">
+        <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <form action="{% url 'Usuarios:iniciar' %}" method="POST">
+            {% csrf_token %}
+              <h1>Inicio Sesion</h1>
+              <div class="form-group">
+                <h3>Correo:</h3>
+                <input class="form-control" type="email" name="correo" id="correo" placeholder="Ingrese su correo">
+              </div>
+              <div class="form-group">
+                <h3>Contraseña:</h3>
+                <input class="form-control" type="password" name="contra" id="contra" placeholder="Ingrese contraseña" >
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="btn btn-primary" >Registrate</button>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-primary" type="submit">Ingresar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        <div class="col-md-4"></div>
+      </div>
+    <br><br>
+    <!-- FOOTER -->
+    {% include './footer.html' %}
+    
+
+
+
+</body>
+</html>
